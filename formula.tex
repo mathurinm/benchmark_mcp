@@ -1,0 +1,20 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+The objective is:
+\begin{equation*}
+    \min_{w \in \mathbb{R}^p}
+        \frac{1}{2 n} \Vert y - X w \Vert^2
+        + \sum_{j=1}^p \rho_{\lambda, \gamma}(w_j)
+\end{equation*}
+
+The penalty is:
+\begin{equation*}
+    \rho_{\lambda, \gamma}(t) =
+    \begin{cases}
+        \lambda |t| - \frac{t^2}{2 \gamma} \enspace, &\text{if } |t| < \lambda \gamma \enspace, \\
+        \frac{\lambda^2 \gamma}{2} \enspace, &\mathrm{otherwise} \enspace.
+    \end{cases}
+\end{equation*}
+\end{document}
