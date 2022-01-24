@@ -5,9 +5,7 @@ from benchopt import safe_import_context
 
 with safe_import_context() as import_ctx:
     from libsvmdata import fetch_libsvm
-    from scipy.sparse import issparse
     import numpy as np
-    from scipy.linalg import norm
     from sklearn.preprocessing import normalize
 
 
