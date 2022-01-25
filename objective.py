@@ -23,7 +23,7 @@ class Objective(BaseObjective):
     name = "MCP Regression"
 
     parameters = {
-        "reg": [0.1, 0.05, 0.01, 0.001],
+        "reg": [0.1, 0.01, 0.001],
         # "reg": [0.05],
         "gamma": [3]}
 
