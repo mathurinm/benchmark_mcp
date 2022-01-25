@@ -26,4 +26,4 @@ class Solver(BaseSolver):
         self.clf.train()
 
     def get_result(self):
-        return self.clf.coef()['beta'].flatten()
+        return self.clf.coef()['beta'][1]
