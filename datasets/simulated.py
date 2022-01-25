@@ -13,7 +13,7 @@ class Dataset(BaseDataset):
     # the cross product for each key in the dictionary.
     parameters = {
         "n_samples, n_features": [
-            (5000, 10000),
+            (500, 2000),
         ],
         "scale": [True],
     }
@@ -23,7 +23,7 @@ class Dataset(BaseDataset):
         self.n_samples = n_samples
         self.n_features = n_features
         self.scale = scale
-        self.random_state = 0
+        self.random_state = 1
 
     def get_data(self):
         X, y, _ = make_correlated_data(

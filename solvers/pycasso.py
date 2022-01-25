@@ -22,7 +22,9 @@ class Solver(BaseSolver):
         self.clf.prec = 1e-12
 
     def run(self, n_iter):
-        self.clf.max_ite = n_iter
+        if n_iter == 0:
+            return np.zeros(self.X.shape[0])
+        self.clf.max_ite = n_iter + 1
         self.clf.train()
 
     def get_result(self):

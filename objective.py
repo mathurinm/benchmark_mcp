@@ -23,8 +23,8 @@ class Objective(BaseObjective):
     name = "MCP Regression"
 
     parameters = {
-        "reg": [0.5, 0.01, 0.001],
-        # "reg": [0.5],
+        "reg": [0.1, 0.05, 0.01, 0.001],
+        # "reg": [0.05],
         "gamma": [3]}
 
     def __init__(self, reg=0.1, gamma=1.2):
