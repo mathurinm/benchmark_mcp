@@ -23,7 +23,6 @@ class Dataset(BaseDataset):
     requirements = ['pip:libsvmdata']
 
     def __init__(self, dataset="bodyfat"):
-        # import ipdb; ipdb.set_trace()
         self.dataset = dataset
         self.X, self.y = None, None
 
