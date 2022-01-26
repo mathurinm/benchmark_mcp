@@ -34,7 +34,7 @@ class Solver(BaseSolver):
         self.lmbd, self.gamma = lmbd, gamma
 
         # cache the numba compilation.
-        self.run(2)
+        self.run(1)
 
     def run(self, n_iter):
         # how to set n_iter for benchopt, on outer iterations or inner ?
@@ -49,9 +49,9 @@ class Solver(BaseSolver):
             return np.zeros(X.shape[1])
 
         weights = lmbd * np.ones(X.shape[1])
-        clf = WeightedLasso(alpha=1, tol=1e-12,
+        clf = WeightedLasso(alpha=1, tol=1e-8,
                             fit_intercept=False,
-                            weights=weights, max_iter=100,
+                            weights=weights, max_iter=20,
                             warm_start=True)
         for _ in range(n_iter):
             clf.penalty.weights = weights

@@ -7,14 +7,14 @@ def subdiff_distance(w, grad, lmbd, gamma):
     subdiff_dist = np.zeros_like(grad)
     for j in range(len(w)):
         if w[j] == 0:
-            # distance of grad to [-lmbd, lmbd]
+            # distance of -grad to [-lmbd, lmbd]
             subdiff_dist[j] = max(0, np.abs(grad[j]) - lmbd)
         elif np.abs(w[j]) < lmbd * gamma:
-            # distance of -grad_j to (lmbd - abs(w[j])/gamma) * sign(w[j])
+            # distance of -grad to (lmbd - abs(w[j])/gamma) * sign(w[j])
             subdiff_dist[j] = np.abs(
                 grad[j] + lmbd * np.sign(w[j]) - w[j] / gamma)
         else:
-            # distance of grad to 0
+            # distance of -grad to 0
             subdiff_dist[j] = np.abs(grad[j])
     return subdiff_dist
 
@@ -23,8 +23,8 @@ class Objective(BaseObjective):
     name = "MCP Regression"
 
     parameters = {
-        "reg": [0.5, 0.01, 0.001],
-        # "reg": [0.5],
+        "reg": [0.1, 0.01, 0.001],
+        # "reg": [0.05],
         "gamma": [3]}
 
     def __init__(self, reg=0.1, gamma=1.2):
@@ -43,7 +43,6 @@ class Objective(BaseObjective):
             self.lmbd * np.abs(beta[idx]) - beta[idx] ** 2 / (2 * self.gamma)
         )
 
-        # compute distance of -grad f to subdifferential of MCP penalty
         grad = self.X.T @ diff / len(self.y)
         opt = subdiff_distance(beta, grad, self.lmbd, self.gamma)
 
