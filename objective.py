@@ -22,7 +22,10 @@ def subdiff_distance(w, grad, lmbd, gamma):
 class Objective(BaseObjective):
     name = "MCP Regression"
 
-    parameters = {"reg": [1, 0.5, 0.1, 0.01], "gamma": [3]}
+    parameters = {
+        "reg": [0.1, 0.01, 0.001],
+        # "reg": [0.05],
+        "gamma": [3]}
 
     def __init__(self, reg=0.1, gamma=1.2):
         self.reg = reg
@@ -39,7 +42,7 @@ class Objective(BaseObjective):
         pen[idx] = (
             self.lmbd * np.abs(beta[idx]) - beta[idx] ** 2 / (2 * self.gamma)
         )
-        # compute distance of -grad f to subdifferential of MCP penalty
+
         grad = self.X.T @ diff / len(self.y)
         opt = subdiff_distance(beta, grad, self.lmbd, self.gamma)
 

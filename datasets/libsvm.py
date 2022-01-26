@@ -5,6 +5,8 @@ from benchopt import safe_import_context
 
 with safe_import_context() as import_ctx:
     from libsvmdata import fetch_libsvm
+    import numpy as np
+    from sklearn.preprocessing import normalize
 
 
 class Dataset(BaseDataset):
@@ -14,7 +16,7 @@ class Dataset(BaseDataset):
     parameters = {
         'dataset': [
             "bodyfat", "leukemia", "news20.binary", "rcv1.binary", "finance",
-            "real-sim"],
+            "real-sim"]
     }
 
     install_cmd = 'conda'
@@ -28,6 +30,9 @@ class Dataset(BaseDataset):
 
         if self.X is None:
             self.X, self.y = fetch_libsvm(self.dataset)
+
+        normalize(self.X, axis=0, copy=False)
+        self.X *= np.sqrt(len(self.y))
 
         data = dict(X=self.X, y=self.y)
 

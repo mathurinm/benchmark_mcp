@@ -13,9 +13,9 @@ class Dataset(BaseDataset):
     # the cross product for each key in the dictionary.
     parameters = {
         "n_samples, n_features": [
-            (100, 200),
+            (500, 2000),
         ],
-        "scale": [True, False],
+        "scale": [True],
     }
 
     def __init__(self, n_samples=10, n_features=50, scale=False):
@@ -23,13 +23,14 @@ class Dataset(BaseDataset):
         self.n_samples = n_samples
         self.n_features = n_features
         self.scale = scale
-        self.random_state = 0
+        self.random_state = 1
 
     def get_data(self):
-
         X, y, _ = make_correlated_data(
             self.n_samples, self.n_features, random_state=self.random_state)
         if self.scale:
+            y -= y.mean()
+            X -= X.mean(axis=0)
             X /= np.linalg.norm(X, axis=0) / np.sqrt(len(y))
         data = dict(X=X, y=y)
 
