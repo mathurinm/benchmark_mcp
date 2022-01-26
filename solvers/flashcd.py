@@ -1,12 +1,17 @@
 from benchopt import BaseSolver, safe_import_context
+from benchopt.stopping_criterion import SufficientProgressCriterion
+
 
 with safe_import_context() as import_ctx:
     from flashcd import MCP
-    import numpy as np
 
 
 class Solver(BaseSolver):
     name = "flashcd"
+
+    stopping_criterion = SufficientProgressCriterion(
+        eps=1e-4, patience=50, strategy="iteration"
+    )
 
     def set_objective(self, X, y, lmbd, gamma):
         # self.X, self.y = np.asfortranarray(X), y
